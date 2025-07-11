@@ -29,4 +29,68 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Message sent!');
         form.reset();
     });
+    initThemeToggle();
 });
+
+// Theme Toggle Function
+function initThemeToggle() {
+    const toggleBtn = document.getElementById('themeToggle');
+    const themeStylesheet = 'css/dark-glass-theme.css';
+    const themeId = 'dark-theme-stylesheet';
+    
+    // Check if theme is already applied (for page refresh persistence)
+    let isDarkMode = localStorage.getItem('darkMode') === 'true';
+    
+    // Apply saved theme on page load
+    if (isDarkMode) {
+        applyDarkTheme();
+        updateButtonText(true);
+    }
+    
+    // Add click event listener to toggle button
+    toggleBtn.addEventListener('click', function() {
+        isDarkMode = !isDarkMode;
+        
+        if (isDarkMode) {
+            applyDarkTheme();
+        } else {
+            removeDarkTheme();
+        }
+        
+        updateButtonText(isDarkMode);
+        // Save preference to localStorage
+        localStorage.setItem('darkMode', isDarkMode);
+    });
+    
+    function applyDarkTheme() {
+        // Check if theme is already applied to avoid duplicates
+        if (!document.getElementById(themeId)) {
+            // Create new link element
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = themeStylesheet;
+            link.id = themeId;
+            
+            // Insert at the end of head tag (after main.css)
+            document.head.appendChild(link);
+        }
+    }
+    
+    function removeDarkTheme() {
+        // Find and remove the theme stylesheet
+        const existingTheme = document.getElementById(themeId);
+        if (existingTheme) {
+            existingTheme.remove();
+        }
+    }
+    
+    function updateButtonText(isDark) {
+        if (isDark) {
+            toggleBtn.innerHTML = '☀️ Light Mode';
+            toggleBtn.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+            toggleBtn.innerHTML = '🌙 Dark Mode';
+            toggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+        }
+    }
+}
