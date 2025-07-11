@@ -101,6 +101,26 @@ button:hover {
     background: rgba(139, 105, 20, 1);
 }
 
+/* Dark details/summary styling */
+details {
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-left: 4px solid rgba(139, 105, 20, 0.8);
+}
+
+summary {
+    color: #4fc3f7;
+    font-weight: bold;
+}
+
+summary:hover {
+    color: #81c784;
+}
+
+details p {
+    color: #e2e8f0;
+}
+
 /* Dark footer */
 footer {
     background: rgba(26, 26, 46, 0.9);
