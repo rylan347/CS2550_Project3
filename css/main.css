@@ -1,4 +1,29 @@
-/* Reset and Base Styles */
+/*
+Base alterations:
+- Changed inheritance for box-sizing
+
+Header alterations: 
+- Added sticky positioning which keeps header visible at all times.
+- Added flex-shrink to prevent logo from getting smaller.
+- Removed default margins.
+
+Navigation sidebar alterations: 
+- Used overflow-y and sticky to allow scrolling and to keep the navigation bar always visible.
+- Used transistion for better hover effects, and made buttons full width.
+- Improved navigation on mobile by making flex equal width and centered buttons.
+
+Main content alterations:
+- Removed conflicting max-width and margin that interfered with grid layout.
+- Added proper width: 100% and overflow-x: hidden to prevent horizontal scrolling.
+- Improved article spacing and ensured full width utilization.
+
+
+
+
+*/
+
+
+/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -16,11 +41,13 @@ body {
 .container {
     display: grid;
     grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr auto;
     grid-template-areas:
         "header header"
         "aside main"
         "footer footer";
     min-height: 100vh;
+    gap: 0;
 }
 
 /* Header Styles */
@@ -32,7 +59,10 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
@@ -41,12 +71,14 @@ header {
     background: #34495e;
     border-radius: 50%;
     border: 2px solid #ecf0f1;
+    flex-shrink: 0;
 }
 
 h1 {
     font-size: 2rem;
     font-weight: normal;
     letter-spacing: 1px;
+    margin: 0;
 }
 
 /* Navigation Styles */
@@ -54,22 +86,33 @@ aside {
     grid-area: aside;
     background: #34495e;
     padding: 20px;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
 nav ul {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+nav li {
+    width: 100%;
 }
 
 nav a {
     display: block;
     padding: 12px 15px;
-    margin-bottom: 5px;
     background: #2c3e50;
     text-decoration: none;
     color: #ecf0f1;
     border-radius: 4px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     font-size: 0.95rem;
+    width: 100%;
 }
 
 nav a:hover {
@@ -87,8 +130,9 @@ main {
     grid-area: main;
     padding: 30px;
     background: #fff;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: none;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 section {
@@ -104,8 +148,9 @@ article {
     padding: 30px;
     margin-bottom: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-left: 4px solid #8b6914;
+    width: 100%;
 }
 
 h2 {
@@ -126,6 +171,7 @@ h3 {
 p {
     margin-bottom: 15px;
     text-align: justify;
+    max-width: 100%;
 }
 
 strong {
@@ -136,13 +182,15 @@ strong {
 figure {
     margin: 20px 0;
     text-align: center;
+    width: 100%;
 }
 
 img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
 }
 
 figcaption {
@@ -160,7 +208,8 @@ figcaption {
     margin: 20px 0;
     overflow: hidden;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .video-container iframe {
@@ -172,13 +221,14 @@ figcaption {
     border: none;
 }
 
-/* Details Element */
+/* Details/Summary elements */
 details {
     margin: 20px 0;
     padding: 20px;
     background: #ecf0f1;
     border-radius: 6px;
     border-left: 4px solid #8b6914;
+    width: 100%;
 }
 
 summary {
