@@ -16,9 +16,28 @@ Main content alterations:
 - Removed conflicting max-width and margin that interfered with grid layout.
 - Added proper width: 100% and overflow-x: hidden to prevent horizontal scrolling.
 - Improved article spacing and ensured full width utilization.
+- Added max-width: 100% to paragraphs to prevent overflow.
+- Improved responsive font sizes with better scaling across breakpoints.
+- Added margin: 0 to headings for consistent spacing control.
 
+Images and Media alterations:
+- Added display: block to images to prevent inline spacing issues.
+- Ensured all media elements are fully responsive with max-width: 100%.
+- Fixed video container aspect ratio and made it fully responsive.
+- Added proper width: 100% to figures and video containers.
 
+Form Styles alterations:
+- Changed focus color from red to theme color (#8b6914) for consistency.
+- Added proper focus indicators with box-shadow for better accessibility.
+- Changed button color to match theme.
+- Added font-family: inherit to inputs for consistent typography.
 
+Responsive Design alterations:
+
+- Added tablet breakpoint (1024px) for better medium-screen experience.
+- Completely redesigned mobile layout to stack properly instead of cramped sidebar.
+- Added small mobile breakpoint (480px) for better phone optimization.
+- Fixed navigation to be horizontal and touch-friendly on mobile.
 
 */
 
@@ -237,6 +256,7 @@ summary {
     color: #2c3e50;
     font-size: 1.1rem;
     padding: 5px 0;
+    outline: none;
 }
 
 summary:hover {
@@ -256,6 +276,7 @@ details p {
 /* Form Styles */
 form {
     max-width: 500px;
+    width: 100%;
 }
 
 label {
@@ -272,27 +293,34 @@ input, textarea {
     border: 1px solid #cbd5e0;
     border-radius: 4px;
     font-size: 16px;
+    font-family: inherit;
 }
 
 input:focus, textarea:focus {
     outline: none;
-    border-color: #e53e3e;
+    border-color: #8b6914;
+    box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.2);
 }
 
 button {
     margin-top: 15px;
     padding: 10px 20px;
-    background: #e53e3e;
+    background: #8b6914;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
 }
 
 button:hover {
-    background: #c53030;
+    background: #6d5010;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(139, 105, 20, 0.3);
 }
 
 /* Footer */
@@ -308,6 +336,7 @@ footer {
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
         grid-template-areas:
             "header"
             "aside"
@@ -318,6 +347,9 @@ footer {
     header {
         flex-direction: column;
         text-align: center;
+        gap: 15px;
+        padding: 20px;
+        position: static;
     }
     
     h1 {
@@ -325,20 +357,32 @@ footer {
     }
     
     aside {
-        padding: 10px;
+        padding: 15px;
+        position: static;
+        height: auto;
     }
     
     nav ul {
-        display: flex;
-        gap: 5px;
+        flex-direction: row;
         flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    nav li {
+        flex: 1;
+        min-width: 100px;
     }
     
     nav a {
-        flex: 1;
         text-align: center;
-        margin-bottom: 0;
-        min-width: 80px;
+        padding: 10px 8px;
+        font-size: 0.9rem;
+        transform: none;
+    }
+    
+    nav a:hover {
+        transform: none;
+        background: #1a252f;
     }
     
     main {
@@ -346,6 +390,68 @@ footer {
     }
     
     article {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    p {
+        text-align: left;
+    }
+}
+
+}
+
+@media (max-width: 480px) {
+    header {
         padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.3rem;
+    }
+    
+    aside {
+        padding: 10px;
+    }
+    
+    nav ul {
+        gap: 5px;
+    }
+    
+    nav a {
+        padding: 8px 5px;
+        font-size: 0.8rem;
+    }
+    
+    main {
+        padding: 10px;
+    }
+    
+    article {
+        padding: 15px;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    .video-container {
+        margin: 15px 0;
+    }
+    
+    details {
+        padding: 15px;
+    }
+    
+    form {
+        max-width: 100%;
     }
 }
