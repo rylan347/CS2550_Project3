@@ -332,6 +332,53 @@ footer {
     padding: 20px;
 }
 
+/* Theme toggle style buttons */
+
+.theme-toggle-btn {
+    margin-left: auto;
+    padding: 8px 16px;
+    background: rgba(139, 105, 20, 0.1);
+    border: 1px solid rgba(139, 105, 20, 0.3);
+    border-radius: 20px;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(139, 105, 20, 0.2);
+    transform: translateY(-1px);
+}
+
+.theme-toggle-btn:focus {
+    outline: 2px solid rgba(139, 105, 20, 0.5);
+    outline-offset: 2px;
+}
+
+/* Adjust header flex for the button */
+header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Mobile adjustments for theme button */
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .theme-toggle-btn {
+        order: 3;
+        width: 100%;
+        margin: 10px 0 0 0;
+        max-width: 200px;
+    }
+}
+
 /* Media Query for Tablet/Mobile */
 @media (max-width: 768px) {
     .container {
